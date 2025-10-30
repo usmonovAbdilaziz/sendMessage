@@ -8,16 +8,17 @@ This project uses environment variables for configuration:
 The `.env` file should contain your webhook URL:
 
 ```
+urlWEB="https://api.example.com/interview"
 url="https://your-ngrok-url.ngrok-free.dev/webhook"
 ```
 
 ## Project Structure
 
-- `app.ts`: Main application file that sets up the HTTP server and orchestrates the data collection process.
-- `src/post.data.ts`: Handles the initial POST request to the interview endpoint, using the webhook URL from environment variables.
-- `src/collect.body.ts`: Utility function to collect the request body data from incoming HTTP requests.
-- `src/get.data.ts`: Handles the final GET request with the combined parts.
-- `.env`: Configuration file containing the webhook URL (not committed to git).
+- `app.ts`: Main application file that sets up the HTTP server and orchestrates the data collection process. Contains all functionality:
+  - POST request handling to the interview endpoint
+  - Request body data collection utility
+  - GET request handling for final data retrieval
+- `.env`: Configuration file containing the webhook URLs (not committed to git).
 - `.env.example`: Template showing the required environment variables.
 
 ## Setup and Usage
@@ -28,13 +29,13 @@ url="https://your-ngrok-url.ngrok-free.dev/webhook"
    npm install
    ```
 
-2. Create a `.env` file based on `.env.example` and add your webhook URL:
+2. Create a `.env` file based on `.env.example` and add your webhook URLs:
 
    ```bash
    cp .env.example .env
    ```
 
-   Then edit the `.env` file to include your ngrok webhook URL.
+   Then edit the `.env` file to include your API endpoint and ngrok webhook URL.
 
 3. Compile TypeScript to JavaScript:
 
@@ -49,6 +50,14 @@ url="https://your-ngrok-url.ngrok-free.dev/webhook"
    ```
 
 5. The server will start on port 4000 and begin the data collection process automatically.
+
+## How It Works
+
+1. The application sends an initial POST request to the API endpoint specified in `urlWEB`
+2. The API responds with `part1` of a method code
+3. The application sets up a webhook server listening on `/webhook` to receive `part2`
+4. When both parts are collected, they are combined to form the complete method code
+5. A final GET request is made to retrieve the challenge result
 
 ## Requirements
 
