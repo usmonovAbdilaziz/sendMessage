@@ -1,0 +1,1 @@
+# https://test.icorp.uz/interview.php?code=part1+part2 ni qaytar shunday javob berish kerak
