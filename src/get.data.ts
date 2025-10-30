@@ -1,5 +1,5 @@
 
-const getData=async(method)=>{
+export const getData=async(method:String)=>{
   try {
       const url = `https://test.icorp.uz/interview.php?code=${method}`;
       const data = await fetch(url);
@@ -7,8 +7,6 @@ const getData=async(method)=>{
       return res;
   } catch (error) {
     console.log('Get qilishda xatolilk',error);
-    
   }
 
 }
-module.exports={getData}
