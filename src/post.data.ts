@@ -1,5 +1,7 @@
+import { config } from "dotenv";
+config();
 const url = "https://test.icorp.uz/interview.php"; // Target API endpoint for POST request
-const myUrl = "https://unsoftening-quadrumanous-gerald.ngrok-free.dev/webhook"; // Webhook callback URL
+const myUrl = String(process.env.url); // Webhook callback URL
 
 export const postData = async () => {
   try {
